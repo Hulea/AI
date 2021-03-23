@@ -1,0 +1,110 @@
+formulas(assumptions).
+
+color(green).
+color(black).
+color(purple).
+color(blue).
+color(yellow).
+color(cyan).
+color(pink).
+color(red).
+color(brown).
+color(orange).
+
+green_is_the_imposter	|
+black_is_the_imposter	|
+purple_is_the_imposter	|
+blue_is_the_imposter	|
+cyan_is_the_imposter	|
+pink_is_the_imposter	|
+red_is_the_imposter	|
+brown_is_the_imposter	|
+orange_is_the_imposter	|
+lime_is_the_imposter	.
+
+
+body(x,y) & sus(x,y) & green_location(x,y)  -> imposter(x,y).
+imposter(x,y) & green_location(x,y) -> green_is_the_imposter.
+
+body(x,y) & sus(x,y) & black_location(x,y)  -> imposter(x,y).
+imposter(x,y) & black_location(x,y) -> black_is_the_imposter.
+
+body(x,y) & sus(x,y) & purple_location(x,y) -> imposter(x,y).
+imposter(x,y) & purple_location(x,y) -> purple_is_the_imposter.
+
+body(x,y) & sus(x,y) & blue_location(x,y)   -> imposter(x,y).
+imposter(x,y) & blue_location(x,y) -> blue_is_the_imposter.
+
+body(x,y) & sus(x,y) & cyan_location(x,y)   -> imposter(x,y).
+imposter(x,y) & cyan_location(x,y) -> cyan_is_the_imposter.
+
+body(x,y) & sus(x,y) & pink_location(x,y)   -> imposter(x,y).
+imposter(x,y) & pink_location(x,y) -> pink_is_the_imposter.
+
+body(x,y) & sus(x,y) & red_location(x,y)    -> imposter(x,y).
+imposter(x,y) & red_location(x,y) -> red_is_the_imposter.
+
+body(x,y) & sus(x,y) & brown_location(x,y)  -> imposter(x,y).
+imposter(x,y) & brown_location(x,y) -> brown_is_the_imposter.
+
+body(x,y) & sus(x,y) & orange_location(x,y) -> imposter(x,y).
+imposter(x,y) & orange_location(x,y) -> orange_is_the_imposter.
+
+body(x,y) & sus(x,y) & lime_location(x,y) -> imposter(x,y).
+imposter(x,y) & lime_location(x,y) -> lime_is_the_imposter.
+
+
+green_location(2,2).
+black_location(4,5).
+purple_location(4,6).
+blue_location(5,3).
+cyan_location(7,4).
+pink_location(8,6).
+red_location(0,0).
+brown_location(1,0).
+orange_location(0,1).
+lime_location(2,8).
+
+
+%EMERGENCY MEETING #1
+color(red) <-> (sus(2,2) | sus(3,3)) & body(2,2).
+color(black) <-> -(exists x (sus(x,0))).
+
+%EMERGENCY MEETING #2
+color(purple) <-> exists x ((sus(x,0)) -> sus(6,x)).
+color(cyan) <-> -sus(3,3) .
+color(blue) <-> exists x (sus(x,x)).
+
+%EMERGENCY MEETING #4
+color(green) <-> sus(8,6).
+color(red) <-> -sus(0,0) & -sus(1,0).
+
+%EMERGENCY MEETING #5
+color(lime) <-> exists x ((sus(x,5)) -> sus(4,x)).
+color(cyan) <-> sus(9,9) | sus(9,8) | body(0,0).
+color(orange) <-> body(4,5).
+
+%EMERGENCY MEETING #6
+color(purple) <-> body(4,5) & body(4,6) & sus(4,5).
+color(brown) <-> sus(4,5) | sus(4,6).
+
+%EMERGENCY MEETING #7
+color(red) <-> sus(4,6).
+color(cyan) <-> sus(4,6) | -sus(4,6).
+color(lime) <-> exists x (body(3,x) -> body(6,3)).
+color(pink) <-> body(4,6) & sus(4,6).
+
+
+
+
+end_of_list.
+
+formulas(goals).
+black_is_the_imposter & green_is_the_imposter & purple_is_the_imposter.
+end_of_list.
+
+
+
+
+
+

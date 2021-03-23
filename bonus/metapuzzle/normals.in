@@ -1,0 +1,16 @@
+formulas(assumptions).
+% a1 : a knight
+%-a1 : a normal
+% b1 : b knight
+%-b1 : b normal
+
+%one knight one knave
+(a1 & -b1) | (-a1 & b1).
+
+%is B normal? yes or no
+d1 <-> b1 | -d1.
+
+a1 -> d1.
+-a1 -> -d1 | d1.
+
+end_of_list.

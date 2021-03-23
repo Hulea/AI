@@ -1,0 +1,39 @@
+set(arithmetic).
+assign(domain_size,4).
+formulas(assumptions).
+
+diff(x,y) -> diff(y,x).
+
+diff( Daredevil, Gorgon).
+diff( Daredevil, Loki).
+diff( Daredevil, Sandman).
+diff( Gorgon, Loki).
+diff( Gorgon, Sandman).
+diff( Loki, Sandman).
+
+Matthew(x) | Petragon(x) | Laufeyson(x) | William(x).
+Superhuman(x) | Hybrid(x) | Giant(x) | Mutant(x).
+
+Matthew(x) & Matthew(y) -> -diff(x,y).
+Petragon(x) & Petragon(y) -> -diff(x,y).
+Laufeyson(x) & Laufeyson(y) -> -diff(x,y).
+William(x) & William(y) -> -diff(x,y).
+
+Superhuman(x) & Superhuman(y) -> -diff(x,y).
+Hybrid(x) & Hybrid(y) -> -diff(x,y).
+Giant(x) & Giant(y) -> -diff(x,y).
+Mutant(x) & Mutant(y) -> -diff(x,y).
+
+year(x) = year(y) -> -diff(x,y).
+
+exists x exists y exists z ( year(x) + 1 = year(y) & Giant(x) & Mutant(y) 
+				& year(x) + 2 = year(z) & Superhuman(z)).
+				
+(year(Sandman) = 1) | Hybrid(Sandman).
+Laufeyson(Loki) | William(Loki).
+William(Gorgon) | year(Gorgon) = 3.
+exists x ( year(Daredevil) = year(x) + 1 & William(x)).
+exists x ( (Matthew(Gorgon) & year(x)=2 & Hybrid(x) ) | (Matthew(x) & year(x)=2 & Hybrid(Gorgon))  ).
+
+
+end_of_list.

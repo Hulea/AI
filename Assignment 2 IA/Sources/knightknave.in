@@ -1,0 +1,41 @@
+formulas(assumptions).
+% a1 : a knave
+%-a1 : a knight
+% b1 : b knave
+%-b1 : b knight
+
+
+%dialog
+%d1 = ce spune logicianul 1
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%are you both knights
+d1 <-> (a1 & b1) | -(a1 & b1).
+
+%are you two of the same type
+d2 <-> ((a1 & b1) | (-a1 & -b1)) | ((-a1 & b1) | (a1 & -b1)).
+
+
+%aici luam toate cazurile posibile :
+%1) a and b knight
+%2) a knight, b knave
+%3) a knave, b knight
+%4) a and b knave
+
+
+(-a1 & -b1) -> d1.
+(-a1 &  b1) -> d1.
+( a1 & -b1) ->-d1.
+( a1 &  b1) -> d1.
+
+
+(-a1 & -b1) -> d2.
+(-a1 &  b1) ->-d2.
+( a1 & -b1) -> d2.
+( a1 &  b1) ->-d2.
+
+
+end_of_list.
+
+

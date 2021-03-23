@@ -1,0 +1,47 @@
+formulas(assumptions).
+%s1/vampire
+% s1 : igor nu e nebun
+%-s1 : igor e nebun
+
+%sane/insane
+% h1 : igor e om
+%-h1 : igor e vampir
+
+%dialog
+%d1 = ce spune logicianul 1
+%d2 = ce spune logicianul 2
+%d3 = ce spune logicianul 3
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%log1: sane s1?
+d1 <-> (h1 & s1) | -(h1 & s1).
+
+%log2 : sane vamp?
+d2 <-> (h1 & -s1) | -(h1 & -s1).
+
+%log3 : insane vamp?
+d3 <-> (-h1 & -s1) | -(-h1 & -s1).
+
+%aici luam toate cazurile posibile de vampirism si nebunie in urmatorul fel:
+%Sane s1 => True
+%Insane s1 => False
+%Sane Vampire => False
+%Insane Vampire => True
+
+( s1 &  h1) ->  d1.
+( s1 & -h1) ->  d1.
+(-s1 &  h1) ->  d1.
+(-s1 & -h1) -> -d1. 
+  
+
+( s1 &  h1) -> -d2. 
+( s1 & -h1) ->  d2.
+(-s1 &  h1) -> -d2.
+(-s1 & -h1) -> -d2. 
+
+( s1 &  h1) -> -d3.
+( s1 & -h1) ->  d3.
+(-s1 &  h1) ->  d3.
+(-s1 & -h1) ->  d3. 
+
+end_of_list.

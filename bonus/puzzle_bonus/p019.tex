@@ -1,0 +1,178 @@
+\newpage
+
+\puzzlebox{
+Arranging Flags
+~\cite{kordemsky1992moscow}}{red!40}{red!10}{
+Komsomol youths have built a small hydroelectric powerhouse. Preparing for its opening, young Communist boys and girls are decorating the powerhouse on all four sides with garlands, electric bulbs, and small flags. There are 12 flags. At first they arrange the flags 4 to a side, as shown, but then they see that the flags can be arranged 5 or even 6 to a side. How?
+}
+
+\begin{figure}[h]
+\begin{subfigure}[t]{0.5\textwidth}
+\centering
+\begin{tikzpicture}[
+roundnode/.style={circle, draw=green!60, fill=green!5, very thick, minimum size=7mm},
+squarednode/.style={rectangle, draw=red!60, fill=red!5, very thick, minimum size=5mm},
+]
+%Nodes
+\node[squarednode] (a) {a};
+\node[roundnode](h) [left=of a] {h};
+\node[roundnode] (b) [right=of a] {b};
+\node[squarednode] (c)  [below=of b] {c};
+\node[roundnode] (d) [below=of c] {d};
+\node[squarednode] (e)  [left=of d] {e};
+\node[roundnode] (f) [left=of e] {f};
+\node[squarednode] (g)  [below=of h] {g};
+
+\draw[-] (a) -- (b);
+\draw[-] (b) -- (c);
+\draw[-] (c) -- (d);
+\draw[-] (d) -- (e);
+\draw[-] (e) -- (f);
+\draw[-] (f) -- (g);
+\draw[-] (g) -- (h);
+\draw[-] (h) -- (a);
+\end{tikzpicture}
+\caption{Modelling the problem.}
+\end{subfigure}
+~
+\begin{subfigure}[t]{0.5\textwidth}
+\centering
+\begin{tikzpicture}[
+roundnode/.style={circle, draw=green!60, fill=green!5, very thick, minimum size=7mm},
+squarednode/.style={rectangle, draw=red!60, fill=red!5, very thick, minimum size=5mm},
+]
+%Nodes
+\node[squarednode] (a) {2};
+\node[roundnode](h) [left=of a] {1};
+\node[roundnode] (b) [right=of a] {1};
+\node[squarednode] (c)  [below=of b] {2};
+\node[roundnode] (d) [below=of c] {1};
+\node[squarednode] (e)  [left=of d] {2};
+\node[roundnode] (f) [left=of e] {1};
+\node[squarednode] (g)  [below=of h] {2};
+
+\draw[-] (a) -- (b);
+\draw[-] (b) -- (c);
+\draw[-] (c) -- (d);
+\draw[-] (d) -- (e);
+\draw[-] (e) -- (f);
+\draw[-] (f) -- (g);
+\draw[-] (g) -- (h);
+\draw[-] (h) -- (a);
+\end{tikzpicture}
+\caption{4 Flags on the same side.}
+\end{subfigure}
+ \caption{4 Flags on the same side.}\label{fig:init_flags}
+\end{figure}
+
+
+\begin{figure}
+\begin{subfigure}[t]{0.5\textwidth}
+\centering
+\begin{tikzpicture}[
+roundnode/.style={circle, draw=green!60, fill=green!5, very thick, minimum size=7mm},
+squarednode/.style={rectangle, draw=red!60, fill=red!5, very thick, minimum size=5mm},
+]
+%Nodes
+\node[squarednode] (a) {1};
+\node[roundnode](h) [left=of a] {2};
+\node[roundnode] (b) [right=of a] {2};
+\node[squarednode] (c)  [below=of b] {1};
+\node[roundnode] (d) [below=of c] {2};
+\node[squarednode] (e)  [left=of d] {1};
+\node[roundnode] (f) [left=of e] {2};
+\node[squarednode] (g)  [below=of h] {1};
+
+\draw[-] (a) -- (b);
+\draw[-] (b) -- (c);
+\draw[-] (c) -- (d);
+\draw[-] (d) -- (e);
+\draw[-] (e) -- (f);
+\draw[-] (f) -- (g);
+\draw[-] (g) -- (h);
+\draw[-] (h) -- (a);
+\end{tikzpicture}
+\caption{Arranging 5 flags on each side.}
+\end{subfigure}
+~
+\begin{subfigure}[t]{0.5\textwidth}
+\centering
+\begin{tikzpicture}[
+roundnode/.style={circle, draw=green!60, fill=green!5, very thick, minimum size=7mm},
+squarednode/.style={rectangle, draw=red!60, fill=red!5, very thick, minimum size=5mm},
+]
+%Nodes
+\node[squarednode] (a) {0};
+\node[roundnode](h) [left=of a] {3};
+\node[roundnode] (b) [right=of a] {3};
+\node[squarednode] (c)  [below=of b] {0};
+\node[roundnode] (d) [below=of c] {3};
+\node[squarednode] (e)  [left=of d] {0};
+\node[roundnode] (f) [left=of e] {3};
+\node[squarednode] (g)  [below=of h] {0};
+
+\draw[-] (a) -- (b);
+\draw[-] (b) -- (c);
+\draw[-] (c) -- (d);
+\draw[-] (d) -- (e);
+\draw[-] (e) -- (f);
+\draw[-] (f) -- (g);
+\draw[-] (g) -- (h);
+\draw[-] (h) -- (a);
+\end{tikzpicture}
+\caption{Arranging 6 flags on each side.}
+\end{subfigure}
+ \caption{5 or 6 flags on the same side}\label{fig:flags}
+\end{figure}
+
+%\puzzlebox{Modelling: Arranging flags}{yellow!40}{yellow!10}{
+%}    
+
+%\puzzlebox{Implementation: Arranging flags}{yellow!40}{yellow!10}{
+\begin{minipage}{\linewidth}
+\lstinputlisting{p019.in}
+\end{minipage}
+%}    
+
+
+\puzzlebox{Solutions}{yellow!40}{yellow!10}{
+Without considering symmetry, there are 7 solutions for arranging 6 flags on each side.
+\begin{center}
+\begin{tabular}{c|cccccccc}
+ Models   & a & b & c & d & e & f & g & h   \\
+  \hline
+  1 & 0 & 0 & 0 & 6 & 0 & 0 & 0 & 6  \\
+  2 & 0 & 1 & 0 & 5 & 0 & 1 & 0 & 5 \\
+  3 & 0 & 2 & 0 & 4 & 0 & 2 & 0 & 4 \\
+  4 & 0 & 6 & 0 & 0 & 0 & 6  & 0 &  0 \\
+   \textbf{5} & \textbf{0} & \textbf{3} & \textbf{0} & \textbf{3} & \textbf{0} & \textbf{3} & \textbf{0} & \textbf{3} \\
+   6 & 0 & 4 & 0 & 2 & 0 & 4 & 0 & 2  \\
+   7 & 0 & 5 & 0 & 1 & 0 & 5 & 0 & 1  \\
+%  \hline
+\end{tabular}
+\end{center}
+If we add the symmetry conditions that each corner and middle should have the same number of flags (lines 26--28 and 31--33), only model no. 5 remains.
+
+If 5 flags needs to be arranged, there are 37 models without symmetry conditions, respectively 1 model when symmetry conditions are active:
+\begin{center}
+ \begin{tabular}{c|cccccccc}
+ Models   & a & b & c & d & e & f & g & h   \\
+  \hline
+  1 & 1 & 2 & 1 & 2 & 1 & 2 & 1 & 2\\
+  \end{tabular}
+ \end{center}
+ 
+
+  If we test with number of flags equals 4 (i=4) we indeed obtain the initial configuration:
+  
+  \begin{center}
+ \begin{tabular}{c|cccccccc}
+ Models   & a & b & c & d & e & f & g & h   \\
+  \hline
+  1 & 2 & 1 & 2 & 1 & 2 & 1 & 2 & 1\\
+  \end{tabular}
+ \end{center}
+}    
+
+
+

@@ -1,0 +1,78 @@
+formulas(assumptions).
+
+%daca 2 Terminale sunt conectate, atunci au acelasi semnal
+
+all t1 (all t2 (Terminal(t1) & Terminal(t2) & Connected(t1,t2) -> Signal(t1) = Signal(t2) )).
+
+%semnalul la orice Terminal e 1 sau 0
+all t (Terminal(t) -> Signal(t)=1 | Signal(t)=0).
+
+%conectarea e comutativa
+all t1 ( all t2 ( Connected(t1,t2) <-> Connected(t2,t1))).
+
+%exista 4 tipuri de porti
+all g (Gate(g) & k = Type(g) -> (k=AND | k=OR | k=XOR | k=NOT)).
+
+
+%and e 0 daca si numai daca inputul e 0
+all g (  (Gate(g) & (Type(g) = AND)) -> ( (Signal(Out(1,g)) = 0)  <-> exists n (Signal(In(n,g)) = 0)  ) ).
+
+%or e 1 iff input e 1
+all g ( ( Gate(g) & (Type(g) = OR ))-> ( (Signal(Out(1,g)) = 1)  <-> exists n (Signal(In(n,g)) = 1) ) ).
+
+%xor e 1 iff inputurile sunt diferite
+%all g ( ( Gate(g) & (Type(g) = XOR))-> ( (Signal(Out(1,g)) = 1)  <-> exists n ( Signal(In(n,g)) != Signal(In(2,g)) ))).
+
+%not
+all g ( Gate(g) & (Type(g) = NOT) -> ( Signal(Out(1,g)) != Signal(In(1,g)) )  ).
+
+
+%the Gates have 2 inputs and 1 output,except not
+all g (Gate(g) & (Type(g) = NOT) -> Arity(g,1,1) ).
+all g (Gate(g) & (k = Type(g)) & (k=AND | k=OR | k=XOR) -> Arity(g,2,1)).
+
+%a circuit has Terminals, up to its input and output arity, and nothing beyond its arity
+
+all c all i all j ( Circuit(c) & Arity(c,i,j) -> all n ( (n<=i -> Terminal(In(c,n))) &
+							   (n> i -> In(c,n) = Nothing) &
+							   (n<=j -> Terminal(Out(c,n))) &
+							   %(n> j -> (c,n) = Nothing)
+							   (n> j -> Out(c,n) = Nothing)
+							 )).
+
+%Gates, terminals, signals, gate types, and Nothing are all distinct
+all g all t ( Gate(g) & Terminal(t) -> ( 
+					   g!=t   & g!=1   & g!=0   & g!=OR   & g!=AND   & g!=XOR   & g!=NOT   & g!=Nothing   &
+					   t!=g   & t!=1   & t!=0   & t!=OR   & t!=AND   & t!=XOR   & t!=NOT   & t!=Nothing   &
+					   1!=t   & 1!=g   & 1!=0   & 1!=OR   & 1!=AND   & 1!=XOR   & 1!=NOT   & 1!=Nothing   &
+					   0!=t   & 0!=1   & 0!=g   & 0!=OR   & 0!=AND   & 0!=XOR   & 0!=NOT   & 0!=Nothing   &
+					   OR!=t  & OR!=1  & OR!=0  & OR!=g   & OR!=AND  & OR!=XOR  & OR!=NOT  & OR!=Nothing  &
+					   AND!=t & AND!=1 & AND!=0 & AND!=OR & AND!=g   & AND!=XOR & AND!=NOT & AND!=Nothing &
+					   XOR!=t & XOR!=1 & XOR!=0 & XOR!=OR & XOR!=AND & XOR!=g   & XOR!=NOT & XOR!=Nothing &
+					   NOT!=t & NOT!=1 & NOT!=0 & NOT!=OR & NOT!=AND & NOT!=XOR & NOT!=g   & NOT!=Nothing &
+					   Nothing!=t & 
+					   Nothing!=1 & 
+					   Nothing!=0 & 
+					   Nothing!=OR & 
+					   Nothing!=AND & 
+					   Nothing!=XOR & 
+					   Nothing!=NOT & 
+					   Nothing!=g) ).
+					   
+%Gates are circuitss
+all g ( Gate(g) -> Circuit(g) ).
+
+
+Circuit(C1) & Arity(C1,2,1).
+%Gate(X1) & Type(X1) = AND.
+Gate(X1) & Type(X1) = NOT.
+Connected(In(1,C1),In(1,X1)).
+%Connected(In(2,C1),In(2,X1)).
+Connected(Out(1,X1),Out(1,C1)).
+
+end_of_list.
+formulas(assumptions).
+
+  %(Signal(In(1, C1)) = 1) & (Signal(In(2, C1)) = 1) & Signal(Out(1,C1)) = 0.
+exists i1 ((Signal(In(1, C1)) = i1) & Signal(Out(1,C1)) = 1).
+end_of_list.

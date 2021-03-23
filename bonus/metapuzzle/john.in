@@ -1,0 +1,36 @@
+formulas(assumptions).
+% j1 = fratele 1 e john
+%-j1 = fratele 1 nu e john
+% j2 = fratele 2 e john
+%-j2 = fratele 2 nu e john
+
+% t1 = fratele 1 zice adv
+%-t1 = fratele 1 nu zice adv
+% t2 = fratele 2 zice adv
+%-t2 = fratele 2 nu zice
+
+%dialog
+%d1 = ce spune fratele 1
+%d2 = ce spune fratele 2
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%doar un john
+(j1 & -j2) | (-j1 & j2).
+%cel putin un mincinos
+(t1 & -t2) | (-t1 & t2) | (-t1 & -t2).
+
+%dialog
+d1 <-> j1.
+d2 <-> j2 | -j2.
+
+(-j1 & -t1) -> -d1. 
+(-j1 &  t1) -> -d1.  
+( j1 & -t1) -> -d1.
+( j1 &  t1) ->  d1.
+
+(-j2 & -t2) -> -d2. 
+(-j2 &  t2) -> -d2.  
+( j2 & -t2) -> -d2.
+( j2 &  t2) ->  d2.
+
+end_of_list.

@@ -1,0 +1,69 @@
+formulas(assumptions).
+% a1 : a knight
+% a2 : a knave
+% a3 : a normal
+% b1 : b knight
+% b2 : b knave
+% b3 : b normal
+% c1 : c knight
+% c2 : c knave
+% c3 : c normal
+
+%dialog
+%d
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%1 knight 1 knave 1 spy
+
+
+(a1 & b2 & c3) |
+(a1 & b3 & c2) |
+(a2 & b1 & c3) |
+(a2 & b3 & c1) |
+(a3 & b1 & c2) |
+(a3 & b2 & c1) .
+
+a1 -> -a2.
+a1 -> -a3.
+a2 -> -a3.
+
+b1 -> -b2.
+b1 -> -b3.
+b2 -> -b3.
+
+c1 -> -c2.
+c1 -> -c3.
+c2 -> -c3.
+
+%a said that c is a knave or c is a spy
+da <-> c2 | c3.
+
+%b said that a is a knight or a is a knave or a is the spy
+db <-> a1 | a2 | a3.
+
+%c said that b is a knight or b is a knave or b is the spy
+dc <-> b1 | b2 | b3.
+
+%aici luam toate cazurile posibile :
+%1) a and b knight
+%2) a knight, b knave
+%3) a knave, b knight
+%4) a and b knave
+
+
+a1 -> da.
+a2 -> -da.
+a3 -> da | -da.
+
+b1 -> db.
+b2 -> -db.
+b3 -> db | -db.
+
+c1 -> dc.
+c2 -> -dc.
+c3 -> dc | -dc.
+
+
+end_of_list.
+
+

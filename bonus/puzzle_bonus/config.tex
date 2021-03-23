@@ -1,0 +1,93 @@
+%\usepackage{algorithmic}
+%\usepackage[linesnumbered,ruled,vlined]{algorithm2e}
+\usepackage[margin=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{listings} 
+\usepackage{graphicx} 
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usepackage{verbatim}
+%\usepackage{combelow}
+\usepackage{float}
+\usepackage{subcaption}
+%\usepackage[utf8x]{inputenc} %alternative solution for Romanian diacritics
+
+
+%\usepackage[toc,page]{appendix}
+\usetikzlibrary{trees}
+%\usepackage{mdframed}
+
+\usetikzlibrary{arrows,calc}
+
+\tikzset{my node/.style={shape=circle,draw=black,fill=red!40,minimum size=5mm,inner sep=0pt}}
+
+
+\newcommand{\puzzlebox}[4]{
+ % \begin{columns}
+ % \begin{column}{0.8\textwidth}}
+    \begin{figure}[h]
+        \centering
+ \begin{tikzpicture}
+   % \node[inner sep=0pt] (book) at (-2,-0.5)
+%    {\includegraphics[width=.12\textwidth]{book.png}};
+        \node[anchor=text,text width=\columnwidth-1.2cm, draw, rounded corners, line width=1pt, fill=#3, inner sep=5mm] (big) {\\#4};
+        \node[draw, rounded corners, line width=.5pt, fill=#2, anchor=west, xshift=5mm] (small) at (big.north west) {#1};
+        %\includegraphics[width=.12\textwidth]{book.png}
+    \end{tikzpicture}
+    \end{figure}
+  %  \begin{column}{0.8\textwidth}}
+%\end{columns}    
+}
+\usetikzlibrary{trees}
+\usetikzlibrary[topaths]
+\definecolor{lightGray}{gray}{0.9}
+\definecolor{lavander}{cmyk}{0,0.48,0,0}
+\definecolor{violet}{cmyk}{0.79,0.88,0,0}
+\definecolor{burntorange}{cmyk}{0,0.52,1,0}
+
+\newcommand\setrow[1]{\gdef\rowmac{#1}#1\ignorespaces}
+\def\lav{lavander!90}
+\def\oran{orange!30}
+
+\tikzstyle{peers}=[draw,circle,violet,bottom color=\lav,
+                  top color= white, text=violet,minimum width=30pt]
+\tikzstyle{superpeers}=[draw,circle,burntorange, left color=\oran,
+                       text=violet,minimum width=30pt]
+\tikzstyle{legendsp}=[rectangle, draw, burntorange, rounded corners,
+                     thin,bottom color=\oran, top color=white,
+                     text=black, minimum width=2.5cm]
+\tikzstyle{legendp}=[rectangle, draw, violet, rounded corners, thin,
+                     bottom color=\lav, top color= white,
+                     text=black, minimum width= 2.5cm]
+\tikzstyle{legend_general}=[rectangle, rounded corners, thin,
+                           burntorange, fill= white, draw, text=violet,
+                           minimum width=2.5cm, minimum height=0.8cm]
+
+\newcount\mycount
+\newcount\mycountm
+
+\newcommand{\currentdata}{ 1 March 2018}
+\newtheorem{example}{Example}
+\newtheorem{puzzle}{Puzzle}
+\newtheorem{exercise}{Exercise}[chapter]
+\newtheorem{solution}{Solution}[chapter]
+\definecolor{lightGray}{gray}{0.9}
+\newcommand{\ggg}{?}
+
+
+\newcounter{row}
+\newcounter{col}
+
+%\newcommand\setrow[9]{
+%  \setcounter{col}{1}
+%  \foreach \n in {#1, #2, #3, #4, #5, #6, #7, #8, #9} {
+%    \edef\x{\value{col} - 0.5}
+%    \edef\y{9.5 - \value{row}}
+%    \node[anchor=center] at (\x, \y) {\n};
+%    \stepcounter{col}
+%  }
+%  \stepcounter{row}
+%}

@@ -1,0 +1,37 @@
+assign(domain_size,4).
+formulas(assumptions).
+
+all x ( knight(x) -> true(x)).
+all x ( knave(x) -> -true(x)).
+
+Different(x,y) -> Different(y,x).
+Different(f1,f2).
+Different(f1,b1).
+Different(f1,b2).
+Different(f2,b1).
+Different(f2,b2).
+Different(b1,b2).
+
+married(x,y) -> married(y,x).
+
+knave(x) <-> -knight(x) & -normal(x).
+knight(x) <-> -knave(x) & -normal(x).
+normal(x) <-> -knight(x) & -knave(x).
+
+all x (all y (knave(x) & married(x,y) -> knight(y))).
+all x (all y (knight(x) & married(x,y) -> knave(y))).
+all x (all y (normal(x) & married(x,y) -> normal(y))).
+ 
+
+true(b1) -> knight(b2).
+true(f1) -> true(b1) & knight(b2).
+true(f2) -> knight(b2).
+
+married(b1,f1).
+married(b2,f2).
+
+end_of_list.
+
+formulas(goals).
+%normal(x1).
+end_of_list.

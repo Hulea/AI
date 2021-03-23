@@ -1,0 +1,33 @@
+formulas(assumptions).
+%human/vampire
+% h1 : e om
+%-h1 : e vampir
+
+
+%sane/insane
+% s1 : nu e nebun
+%-s1 : e nebun
+
+%dialog
+%d1 = ce spune
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%i am or i am not an insane vampire
+d1 <-> (-h1 & -s1) | -(-h1 & -s1).
+
+
+%aici luam toate cazurile posibile de vampirism si nebunie in urmatorul fel:
+%Sane Human => True
+%Insane Human => False
+%Sane Vampire => False
+%Insane Vampire => True
+
+(-h1 & -s1) ->  d1. 
+(-h1 &  s1) -> -d1.  
+( h1 & -s1) -> -d1.
+( h1 &  s1) ->  d1.
+
+end_of_list.
+
+

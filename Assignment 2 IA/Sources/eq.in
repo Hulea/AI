@@ -1,0 +1,40 @@
+set(arithmetic).
+assign(max_models, -1).
+assign(domain_size,27).
+
+list(distinct).
+	[0,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z].
+end_of_list.
+
+formulas(assumptions).
+
+C*G = C.	
+6*C = C*E.
+B + 3 != 2*A.
+3*I >= B.
+F != A + D.
+F = C + H.
+3*I <= 9.
+C+E >= A.
+A+F+H+1 = C + D*I.
+E != H + I.
+H > B.
+J > K.
+K=25.
+2*L= O.
+M=Y+-1.
+N+-1=Z + C.
+O + 2 = Y.
+P= 2 * Z.
+Q=L+F.
+10*R=10*V + Z.
+3*S=3*P + G.
+T= U + 1.
+U=3*H.
+V= T + 1.
+2*W = J.
+X=B + 2*C + 2.
+Y > M & Y<K.
+Z=A+G+2.
+
+end_of_list.

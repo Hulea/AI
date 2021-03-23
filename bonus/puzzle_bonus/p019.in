@@ -1,0 +1,26 @@
+set(arithmetic).
+assign(domain_size,7). 
+assign(max_models,-1).
+
+formulas(assumptions).
+
+% maximum 12 flags
+a + b + c + d + e + f + g + h = 12.
+
+%number of flags for each side.
+i=6 | i=5.
+
+a + b + h = i.
+b + c + d = i.
+d + e + f = i.
+f + g + h = i.
+
+% symmetry conditions: 
+
+% each corner should the same number of flags
+h=b & b=f & f=d.
+
+% each middle should the same number of flags
+a=c & c=e & e=g.
+
+end_of_list.

@@ -1,0 +1,77 @@
+formulas(assumptions).
+
+%1)Ursii, lupii, vulpile, pasarile, gandacii si melcii sunt animale si exista cel putin un specimen pentru fiecare.
+
+Urs(x) -> animal(x).
+Lup(x) -> animal(x).
+Fox(x) -> animal(x).
+Pasare(x) -> animal(x).
+Gandac(x) -> animal(x).
+Melc(x) -> animal(x).
+
+exists x Urs(x).
+exists x Lup(x).
+exists x Fox(x).
+exists x Pasare(x).
+exists x Gandac(x).
+exists x Melc(x).
+
+
+%2)Exista si varza si afine, acestea fiind plante.
+
+exists x Varza(x).
+Varza(x) -> planta(x).
+exists x Afine(x).
+Afine(x) -> planta(x).
+
+%3) Fiecare animal mananca plante sau toate celelalte animale care nu sunt mai mari si mananca plante.
+
+all x (animal(x) -> (all y 
+			(planta(y)->mananca(x,y))
+		     ) 
+		 |  
+		    (all z 
+		    	(animal(z) & mai_mare(x,z) &
+		    		(exists u 
+		    			(planta(u) & mananca(z,u))) ->  mananca(x,z)
+		    	)
+		    )
+      ).
+
+
+%4) Ursii sunt mai mari decat lupii, care sunt mai mari decat vulpile, care sunt mai mari decat pasarile, care sunt mai mari decat gandacii si melcii.
+Urs(x) & Lup(y) -> mai_mare(x,y).
+Lup(x) & Fox(y) -> mai_mare(x,y).
+Fox(x) & Pasare(y) -> mai_mare(x,y).
+Pasare(x) & Gandac(y) -> mai_mare(x,y).
+Pasare(x) & Melc(y) -> mai_mare(x,y).
+
+
+%5)Ursii nu mananca lupi,varza si vulpi, lupii nu mananca vulpi sau varza, pasarile mananca gandaci dar nu si melci.
+Urs(x) & Vulpe(y) -> -mananca(x,y).
+Urs(x) & Varza(y) -> -mananca(x,y).
+Urs(x) & Lup(y) -> -mananca(x,y).
+Lup(x) & Fox(y) -> -mananca(x,y).
+Lup(x) & Varza(y) -> -mananca(x,y).
+Pasare(x) & Gandac(y) -> mananca(x,y).
+Pasare(x) & Melc(y) -> -mananca(x,y).
+
+
+%6)Ursii mananca afine iar gandacii si melcii mananca unele plante.
+Gandac(x) -> (exists y (planta(y) & mananca(x,y))).
+Melc(x)       -> (exists y (planta(y) & mananca(x,y))).
+Urs(x)	-> (exists y (planta(y) & mananca(x,y))).
+
+
+end_of_list.
+
+formulas(goals).
+
+% Exista un animal care mananca toate animalele care mananca varza
+
+exists x exists y ( animal(x) &
+	            animal(y) &
+	            mananca(x,y) &
+                    (all z (Varza(z) -> mananca(y,z)))).
+
+end_of_list.
